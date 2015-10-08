@@ -25,7 +25,7 @@ import com.google.gct.idea.appengine.gradle.project.IdeaAppEngineProject;
 import com.google.gct.idea.appengine.run.AppEngineRunConfiguration;
 import com.google.gct.idea.appengine.run.AppEngineRunConfigurationType;
 import com.google.gct.login.stats.UsageTrackerService;
-import com.google.gct.idea.util.GctTracking;
+import com.google.gct.login.stats.GctTracking;
 import com.intellij.execution.RunManagerEx;
 import com.intellij.execution.RunnerAndConfigurationSettings;
 import com.intellij.execution.configurations.RunConfiguration;

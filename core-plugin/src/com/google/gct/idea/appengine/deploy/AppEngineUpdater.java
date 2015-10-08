@@ -19,7 +19,7 @@ import com.google.common.base.Strings;
 import com.google.gct.idea.appengine.gradle.GradleInvoker;
 import com.google.gct.idea.appengine.sdk.AppEngineSdk;
 import com.google.gct.login.stats.UsageTrackerService;
-import com.google.gct.idea.util.GctTracking;
+import com.google.gct.login.stats.GctTracking;
 
 import com.intellij.execution.ExecutionException;
 import com.intellij.execution.ExecutionManager;

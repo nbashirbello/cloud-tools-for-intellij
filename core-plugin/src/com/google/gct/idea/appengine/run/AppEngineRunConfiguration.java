@@ -21,7 +21,7 @@ import com.google.gct.idea.appengine.sdk.AppEngineSdk;
 
 import com.google.gct.login.stats.UsageTrackerService;
 import com.google.gct.idea.util.GctBundle;
-import com.google.gct.idea.util.GctTracking;
+import com.google.gct.login.stats.GctTracking;
 
 import com.intellij.execution.ExecutionException;
 import com.intellij.execution.Executor;

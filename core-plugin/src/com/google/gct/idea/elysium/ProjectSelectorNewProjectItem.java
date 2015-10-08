@@ -16,7 +16,7 @@
 package com.google.gct.idea.elysium;
 
 import com.google.gct.login.stats.UsageTrackerService;
-import com.google.gct.idea.util.GctTracking;
+import com.google.gct.login.stats.GctTracking;
 import com.intellij.ide.BrowserUtil;
 import com.intellij.ui.UI;
 import com.intellij.ui.components.JBLabel;

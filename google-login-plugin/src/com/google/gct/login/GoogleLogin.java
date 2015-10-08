@@ -22,6 +22,8 @@ import com.google.api.client.googleapis.auth.oauth2.GoogleOAuthConstants;
 import com.google.api.client.http.HttpRequestFactory;
 import com.google.api.client.repackaged.com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Strings;
+import com.google.gct.login.stats.GctTracking;
+import com.google.gct.login.stats.UsageTrackerService;
 import com.google.gct.login.ui.GoogleLoginActionButton;
 import com.google.gct.login.ui.GoogleLoginCopyAndPasteDialog;
 import com.google.gdt.eclipse.login.common.*;
@@ -314,6 +316,7 @@ public class GoogleLogin {
    * either succeeds or fails.
    */
   public void logIn(@Nullable final String message, @Nullable final IGoogleLoginCompletedCallback callback) {
+    UsageTrackerService.getInstance().trackEvent(GctTracking.CATEGORY, GctTracking.LOGIN, "login.start", null);
     users.removeActiveUser();
     uiFacade.notifyStatusIndicator();
 
@@ -424,6 +427,7 @@ public class GoogleLogin {
       logOutAllUsers();
     }
 
+    UsageTrackerService.getInstance().trackEvent(GctTracking.CATEGORY, GctTracking.LOGIN, "logout.complete", null);
     return loggedOut;
   }
 
@@ -624,6 +628,7 @@ public class GoogleLogin {
         verificationCode = receiver.waitForCode();
       }
       catch (RequestCancelledException e) {
+        UsageTrackerService.getInstance().trackEvent(GctTracking.CATEGORY, GctTracking.LOGIN, "login.cancelled", null);
         GoogleLoginUtils.showErrorDialog("Login cancelled.", "Google Login");
         return null;
       }
@@ -635,6 +640,7 @@ public class GoogleLogin {
         receiver = null;
       }
 
+      UsageTrackerService.getInstance().trackEvent(GctTracking.CATEGORY, GctTracking.LOGIN, "login.complete", null);
       return new VerificationCodeHolder(verificationCode, redirectUrl);
     }
 

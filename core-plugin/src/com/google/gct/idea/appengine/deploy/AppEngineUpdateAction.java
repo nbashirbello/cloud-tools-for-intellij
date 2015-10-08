@@ -16,7 +16,7 @@
 package com.google.gct.idea.appengine.deploy;
 
 import com.google.gct.login.stats.UsageTrackerService;
-import com.google.gct.idea.util.GctTracking;
+import com.google.gct.login.stats.GctTracking;
 
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
