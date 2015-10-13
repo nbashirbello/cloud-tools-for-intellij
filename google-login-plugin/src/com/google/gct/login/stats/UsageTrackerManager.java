@@ -9,7 +9,7 @@ import com.intellij.openapi.diagnostic.Logger;
 public class UsageTrackerManager {
     private static final Logger LOG = Logger.getInstance(UsageTrackerManager.class);
     private static final String USAGE_TRACKER_KEY = "GOOGLE_CLOUD_TOOLS_USAGE_TRACKER_OPT_IN";
-    private final static String USAGE_TRACKER_PROPERTY = "usage.tracker.property";
+    private static final String USAGE_TRACKER_PROPERTY = "usage.tracker.property";
 
     private UsageTrackerManager() {}
 

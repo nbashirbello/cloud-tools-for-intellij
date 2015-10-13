@@ -1,5 +1,7 @@
 package com.google.gct.login.stats;
 
+import com.intellij.ide.BrowserUtil;
+import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.options.ConfigurationException;
 import com.intellij.openapi.options.SearchableConfigurable;
 import org.jetbrains.annotations.Nls;
@@ -10,6 +12,9 @@ import javax.swing.*;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.net.URL;
 
 /**
  * Implementation of {@code applicationConfigurable} extension that provides a
@@ -17,8 +22,14 @@ import java.awt.*;
  */
 public class GctConfigurable implements SearchableConfigurable {
     private JCheckBox enableUsageTrackerBox;
-    private static String ENABLE_TRACKER_TEXT =
+    private static final Logger LOG = Logger.getInstance(GctConfigurable.class);
+    private static final String ENABLE_TRACKER_TEXT =
             "Would you like to help Google improve the Cloud Tools for IntelliJ plug-in?";
+    private static final String PRIVACY_POLICY_URL = "http://www.google.com/policies/privacy/";
+    private static final String PRIVACY_POLICY_TEXT = "<html>Your use of this plugin is subject to "
+            + "the Apache 2.0 software license and the <a href=\"" + PRIVACY_POLICY_URL
+            + "\">Google Privacy Policy</a>.</html>";
+
 
     public GctConfigurable() {
     }
@@ -88,9 +99,29 @@ public class GctConfigurable implements SearchableConfigurable {
             enableUsageTrackerBox.setEnabled(false);
         }
 
+        final JLabel privacyPolicyText = new JLabel(PRIVACY_POLICY_TEXT);
+        privacyPolicyText.addMouseListener(new MouseAdapter() {
+            public void mouseEntered(MouseEvent me) {
+                privacyPolicyText.setCursor(new Cursor(Cursor.HAND_CURSOR));
+            }
+            public void mouseExited(MouseEvent me) {
+                privacyPolicyText.setCursor(Cursor.getDefaultCursor());
+            }
+            public void mouseClicked(MouseEvent me)
+            {
+                try {
+                    BrowserUtil.browse(new URL(PRIVACY_POLICY_URL));
+                }
+                catch(Exception e) {
+                    GctConfigurable.LOG.error(e);
+                }
+            }
+        });
+
         JPanel usageTrackerGroup = new JPanel(new BorderLayout());
         usageTrackerGroup.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED), "Usage Tracker"));
         usageTrackerGroup.add(enableUsageTrackerBox, BorderLayout.NORTH);
+        usageTrackerGroup.add(privacyPolicyText, BorderLayout.SOUTH);
         return usageTrackerGroup;
     }
 }

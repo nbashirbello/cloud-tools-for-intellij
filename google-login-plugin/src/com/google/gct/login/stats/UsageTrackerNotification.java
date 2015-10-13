@@ -13,7 +13,7 @@ import javax.swing.event.HyperlinkEvent;
  * Creates notification to allow user to opt in/out of usage traking for Cloud Tools plugin.
  */
 public class UsageTrackerNotification {
-    public static String GROUP_DISPLAY_ID = "Cloud Tools Plugin Usage Statistics";
+    public static final String GROUP_DISPLAY_ID = "Cloud Tools Plugin Usage Statistics";
 
     private  UsageTrackerNotification () {
     }
