@@ -83,6 +83,11 @@ public class GctConfigurable implements SearchableConfigurable {
         enableUsageTrackerBox = new JCheckBox(ENABLE_TRACKER_TEXT);
         enableUsageTrackerBox.setSelected(UsageTrackerManager.getOptIn());
 
+        // Disable checkbox if usage tracker property has not been configured
+        if (!UsageTrackerManager.isTrackingConfigured()) {
+            enableUsageTrackerBox.setEnabled(false);
+        }
+
         JPanel usageTrackerGroup = new JPanel(new BorderLayout());
         usageTrackerGroup.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED), "Usage Tracker"));
         usageTrackerGroup.add(enableUsageTrackerBox, BorderLayout.NORTH);

@@ -51,7 +51,7 @@ public class GoogleUsageTracker implements UsageTracker {
     @NonNls
     private static final String ANALYTICS_URL = "https://ssl.google-analytics.com/collect";
     @NonNls
-    private static final String ANALYTICS_ID = "UA-67138797-1";
+    private static final String ANALYTICS_PROPERTY = UsageTrackerManager.getAnalyticsProperty();
     @NonNls
     private static final String ANALYTICS_APP = "Cloud Tools for IntelliJ";
     @NonNls
@@ -59,7 +59,7 @@ public class GoogleUsageTracker implements UsageTracker {
 
     private static final List<? extends NameValuePair> analyticsBaseData = ImmutableList
             .of(new BasicNameValuePair("v", "1"),
-                    new BasicNameValuePair("tid", ANALYTICS_ID),
+                    new BasicNameValuePair("tid", ANALYTICS_PROPERTY),
                     new BasicNameValuePair("t", "event"),
                     new BasicNameValuePair("an", ANALYTICS_APP),
                     new BasicNameValuePair("av", ApplicationInfo.getInstance().getFullVersion()),
@@ -69,7 +69,7 @@ public class GoogleUsageTracker implements UsageTracker {
                            @NotNull String eventAction,
                            @Nullable String eventLabel,
                            @Nullable Integer eventValue) {
-        if (!UsageTrackerManager.getOptIn()) {
+        if (!(UsageTrackerManager.isTrackingConfigured() && UsageTrackerManager.getOptIn())) {
             return;
         }
 
